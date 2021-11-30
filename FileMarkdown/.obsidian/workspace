@@ -1,0 +1,98 @@
+{
+  "main": {
+    "id": "3b5027f216da7ca4",
+    "type": "split",
+    "children": [
+      {
+        "id": "71c23be2bcad7dd1",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ad7a49c320a5e9a7",
+    "type": "split",
+    "children": [
+      {
+        "id": "8e9f3b8102e920f9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b0beeec933303a68",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "e7dd9654157ab0cc",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e29d33b6a596af19",
+    "type": "split",
+    "children": [
+      {
+        "id": "ebe4d97dde973876",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d4bd441767bb2657",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "71c23be2bcad7dd1",
+  "lastOpenFiles": [
+    "Công nghệ áp dụng/Công nghệ áp dụng.md",
+    "Mục lục.md",
+    "Mô tả phần mền/Mô tả phần mền.md",
+    "Mô tả phần mền/Cấu trúc.md",
+    "Mô tả phần mền/Chức năng.md",
+    "Công nghệ áp dụng/Thư viện MaterialDesign.md",
+    "Công nghệ áp dụng/Thư viện LiveChart.md",
+    "Công nghệ áp dụng/Mô hình MVVM.md",
+    "Mô tả phần mền/im.md",
+    "images/Giao diên MaterialDesign.png"
+  ]
+}

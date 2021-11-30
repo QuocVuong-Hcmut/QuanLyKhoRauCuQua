@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:VM="clr-namespace:Navigation_Drawer_App.ViewModel"
+    >
+    <VM:MainViewModel x:Key="MV"></VM:MainViewModel>
+    <VM:InputViewModel x:Key="IVM"></VM:InputViewModel>
+    <VM:MainControlViewModel x:Key="MCVM"></VM:MainControlViewModel>
+    <VM:ObjectViewModel x:Key="OBVM"></VM:ObjectViewModel>
+    <VM:OutputViewModel x:Key="OVM"></VM:OutputViewModel>
+    <VM:StaticsControlViewModel x:Key="SVM"></VM:StaticsControlViewModel>
+    <VM:SupplierViewModel x:Key="SPVM"></VM:SupplierViewModel>
+    <VM:UnitViewModel x:Key="UVM"></VM:UnitViewModel>
+
+</ResourceDictionary>

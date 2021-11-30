@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QUANLYKHORAUCUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="20" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="IdStaffRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Inputs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idObject" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="IdSupplier" Type="int" Nullable="false" />
+          <Property Name="ContractDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Objects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="IdUnit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Outputs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idObject" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="IdCustomer" Type="int" Nullable="false" />
+          <Property Name="DateOutput" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StaffRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ContractDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Accounts__IdStaf__5629CD9C">
+          <End Role="StaffRoles" Type="Self.StaffRoles" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="IdStaffRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__Contract__59063A47">
+          <End Role="Objects" Type="Self.Objects" Multiplicity="1" />
+          <End Role="Inputs" Type="Self.Inputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="idObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__IdSuppli__59FA5E80">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="Inputs" Type="Self.Inputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="IdSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Objects__IdUnit__4D94879B">
+          <End Role="Units" Type="Self.Units" Multiplicity="1" />
+          <End Role="Objects" Type="Self.Objects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Objects">
+              <PropertyRef Name="IdUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__DateOut__5CD6CB2B">
+          <End Role="Objects" Type="Self.Objects" Multiplicity="1" />
+          <End Role="Outputs" Type="Self.Outputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="idObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__IdCusto__5DCAEF64">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Outputs" Type="Self.Outputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QUANLYKHORAUCUModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inputs" EntityType="Self.Inputs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Objects" EntityType="Self.Objects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Outputs" EntityType="Self.Outputs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffRoles" EntityType="Self.StaffRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Accounts__IdStaf__5629CD9C" Association="Self.FK__Accounts__IdStaf__5629CD9C">
+            <End Role="StaffRoles" EntitySet="StaffRoles" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__Contract__59063A47" Association="Self.FK__Inputs__Contract__59063A47">
+            <End Role="Objects" EntitySet="Objects" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__IdSuppli__59FA5E80" Association="Self.FK__Inputs__IdSuppli__59FA5E80">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Objects__IdUnit__4D94879B" Association="Self.FK__Objects__IdUnit__4D94879B">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Objects" EntitySet="Objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__DateOut__5CD6CB2B" Association="Self.FK__Outputs__DateOut__5CD6CB2B">
+            <End Role="Objects" EntitySet="Objects" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__IdCusto__5DCAEF64" Association="Self.FK__Outputs__IdCusto__5DCAEF64">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QUANLYKHORAUCUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdStaffRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StaffRole" Relationship="Self.FK__Accounts__IdStaf__5629CD9C" FromRole="Accounts" ToRole="StaffRoles" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Outputs" Relationship="Self.FK__Outputs__IdCusto__5DCAEF64" FromRole="Customers" ToRole="Outputs" />
+        </EntityType>
+        <EntityType Name="Input">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idObject" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="IdSupplier" Type="Int32" Nullable="false" />
+          <Property Name="ContractDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Object" Relationship="Self.FK__Inputs__Contract__59063A47" FromRole="Inputs" ToRole="Objects" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK__Inputs__IdSuppli__59FA5E80" FromRole="Inputs" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="Object">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdUnit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inputs" Relationship="Self.FK__Inputs__Contract__59063A47" FromRole="Objects" ToRole="Inputs" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK__Objects__IdUnit__4D94879B" FromRole="Objects" ToRole="Units" />
+          <NavigationProperty Name="Outputs" Relationship="Self.FK__Outputs__DateOut__5CD6CB2B" FromRole="Objects" ToRole="Outputs" />
+        </EntityType>
+        <EntityType Name="Output">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idObject" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+          <Property Name="DateOutput" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Outputs__IdCusto__5DCAEF64" FromRole="Outputs" ToRole="Customers" />
+          <NavigationProperty Name="Object" Relationship="Self.FK__Outputs__DateOut__5CD6CB2B" FromRole="Outputs" ToRole="Objects" />
+        </EntityType>
+        <EntityType Name="StaffRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Accounts__IdStaf__5629CD9C" FromRole="StaffRoles" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContractDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Inputs" Relationship="Self.FK__Inputs__IdSuppli__59FA5E80" FromRole="Suppliers" ToRole="Inputs" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Objects" Relationship="Self.FK__Objects__IdUnit__4D94879B" FromRole="Units" ToRole="Objects" />
+        </EntityType>
+        <Association Name="FK__Accounts__IdStaf__5629CD9C">
+          <End Role="StaffRoles" Type="Self.StaffRole" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="IdStaffRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__IdCusto__5DCAEF64">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Outputs" Type="Self.Output" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__Contract__59063A47">
+          <End Role="Objects" Type="Self.Object" Multiplicity="1" />
+          <End Role="Inputs" Type="Self.Input" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="idObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__IdSuppli__59FA5E80">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Inputs" Type="Self.Input" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="IdSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Objects__IdUnit__4D94879B">
+          <End Role="Units" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Objects" Type="Self.Object" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Objects">
+              <PropertyRef Name="IdUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__DateOut__5CD6CB2B">
+          <End Role="Objects" Type="Self.Object" Multiplicity="1" />
+          <End Role="Outputs" Type="Self.Output" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="idObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QUANLYKHORAUCUEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Inputs" EntityType="Self.Input" />
+          <EntitySet Name="Objects" EntityType="Self.Object" />
+          <EntitySet Name="Outputs" EntityType="Self.Output" />
+          <EntitySet Name="StaffRoles" EntityType="Self.StaffRole" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <AssociationSet Name="FK__Accounts__IdStaf__5629CD9C" Association="Self.FK__Accounts__IdStaf__5629CD9C">
+            <End Role="StaffRoles" EntitySet="StaffRoles" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__IdCusto__5DCAEF64" Association="Self.FK__Outputs__IdCusto__5DCAEF64">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__Contract__59063A47" Association="Self.FK__Inputs__Contract__59063A47">
+            <End Role="Objects" EntitySet="Objects" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__IdSuppli__59FA5E80" Association="Self.FK__Inputs__IdSuppli__59FA5E80">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Objects__IdUnit__4D94879B" Association="Self.FK__Objects__IdUnit__4D94879B">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Objects" EntitySet="Objects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__DateOut__5CD6CB2B" Association="Self.FK__Outputs__DateOut__5CD6CB2B">
+            <End Role="Objects" EntitySet="Objects" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QUANLYKHORAUCUModelStoreContainer" CdmEntityContainer="QUANLYKHORAUCUEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdStaffRole" ColumnName="IdStaffRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inputs">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Input">
+              <MappingFragment StoreEntitySet="Inputs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idObject" ColumnName="idObject" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IdSupplier" ColumnName="IdSupplier" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Objects">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Object">
+              <MappingFragment StoreEntitySet="Objects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outputs">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Output">
+              <MappingFragment StoreEntitySet="Outputs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idObject" ColumnName="idObject" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="DateOutput" ColumnName="DateOutput" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffRoles">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.StaffRole">
+              <MappingFragment StoreEntitySet="StaffRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="QUANLYKHORAUCUModel.Unit">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
